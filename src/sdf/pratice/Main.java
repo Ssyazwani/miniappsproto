@@ -41,12 +41,7 @@ public class Main {
                 System.out.println(category);
             }
 
-            Map<String, String> columnMap = readColumnsToMap(args[0], 1, 2);
-
-            // Assuming you want to print or use the columnMap
-            for (Map.Entry<String, String> entry : columnMap.entrySet()) {
-                System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-            }
+            
 
             Map<String, Float> result = calculateAverageRating(args[0], 1, 2 );
             for (Map.Entry<String, Float> enter : result.entrySet()) {
@@ -81,32 +76,6 @@ public class Main {
 
      }
     
-
-    private static Map<String, String> readColumnsToMap(String filePath, int column1Index, int column2Index)
-            throws IOException {
-        Map<String, String> columnMap = new HashMap<>();
-
-        try (FileReader fileReader = new FileReader(filePath);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-
-            // Skip the header if needed
-            bufferedReader.readLine();
-
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] columns = line.split(",");
-                if (columns.length > Math.max(column1Index, column2Index)) {
-                    String key = columns[column1Index].trim();
-                    String value = columns[column2Index].trim();
-                    if (!value.equalsIgnoreCase("NaN")) {
-                        columnMap.put(key, value);
-                }
-            }
-        }
-
-        return columnMap;
-    }
- }
 
  private static Map<String, Float> calculateAverageRating (String filePath, int column1Index, int column2Index) throws IOException {
     Map<String, Float> averageRatingMap = new HashMap<>();
