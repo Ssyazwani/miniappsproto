@@ -61,12 +61,20 @@ public class Main {
                     }
             
                     // Print the lowest ratings
-                    Map<String, Float> lowestRatingsApps = analyzeRatings(args[0],0, 1, 2 );
-                    System.out.println("Lowest Ratings:");
-                    for (Entry<String, Float> entry : lowestRatingsApps.entrySet()) {
-                        System.out.printf("Category: %s, Lowest Rating App: %s, Rating: %.2f%n",
-                                entry.getKey(), entry.getValue(), lowestRatingsApps.get(entry.getKey()));
-                    }
+             Map<String, Float> lowestRatingsApps = analyzeRatings(args[0],0, 1, 2 );
+             System.out.println("Lowest Ratings:");
+             for (Entry<String, Float> entry : lowestRatingsApps.entrySet()) {
+             System.out.printf("Category: %s, Lowest Rating App: %s, Rating: %.2f%n",
+             entry.getKey(), entry.getValue(), lowestRatingsApps.get(entry.getKey()));
+                }
+
+            Map<String, Integer> NumofApps = totalNum(args[0], 0, 1);
+            for (Map.Entry<String, Integer> entry : NumofApps.entrySet()) {
+            System.out.printf("Category: %s, Number of Apps: %d%n", entry.getKey(), entry.getValue());
+                }
+            
+             int lines = totalLines(args[0]);
+            System.out.println("Total lines in the file: " + lines);
 
 
         }
@@ -159,7 +167,6 @@ public class Main {
         try (FileReader fileReader = new FileReader(filePath);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 
-            // Skip the header if needed
             bufferedReader.readLine();
 
             String line;
@@ -193,8 +200,48 @@ public class Main {
         return lowestRatings;
 
     }
-}
 
+    private static Map<String, Integer> totalNum(String filePath, int appIndex, int categoryIndex) throws IOException {
+        Map<String, Integer> NumofApps = new HashMap<>();
+    
+        try (FileReader fileReader = new FileReader(filePath);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+    
+            bufferedReader.readLine(); // Skip the header
+    
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] columns = line.split(",");
+                if (columns.length > Math.max(appIndex, categoryIndex)) {
+                    String app = columns[appIndex].trim();
+                    String category = columns[categoryIndex].trim();
+    
+                    // Increment the count for the category
+                    NumofApps.put(category, NumofApps.getOrDefault(category, 0) + 1);
+                }
+            }
+    
+            return NumofApps;
+        }
+    }
+
+    private static int totalLines(String filePath) throws IOException {
+        int totalLines = 0;
+    
+        try (FileReader fileReader = new FileReader(filePath);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+    
+            bufferedReader.readLine(); // Skip the header
+    
+            while (bufferedReader.readLine() != null) {
+                totalLines++;
+            }
+        }
+    
+        return totalLines;
+    }
+    
+ }  
 
 
     
