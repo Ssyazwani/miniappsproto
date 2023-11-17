@@ -111,6 +111,7 @@ public class Main {
  private static Map<String, Float> calculateAverageRating (String filePath, int column1Index, int column2Index) throws IOException {
     Map<String, Float> averageRatingMap = new HashMap<>();
     Map<String, Integer> categoryCountMap = new HashMap<>();
+    int nanCount = 0;
 
     try (FileReader fileReader = new FileReader(filePath);
          BufferedReader bufferedReader = new BufferedReader(fileReader)) {
@@ -134,10 +135,13 @@ public class Main {
 
                     // Update count for the category
                     categoryCountMap.put(category, categoryCountMap.getOrDefault(category, 0) + 1);
-                }
+                } else {
+                    nanCount++;
             }
         }
     }
+
+    System.out.println("Number of discarded values ignored: " + nanCount);
 
     // Calculate and store the average rating for each category
     Map<String, Float> result = new HashMap<>();
@@ -155,6 +159,7 @@ public class Main {
     }
 
     return result;
+}
 
     }
 
