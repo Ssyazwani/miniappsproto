@@ -47,7 +47,6 @@ public class Main {
             Map<String, Map<String, List<Float>>> categoryMap = analyzeAndPrintRatings(args[0]);
             for (Map.Entry<String, Map<String, List<Float>>> categoryEntry : categoryMap.entrySet()) {
                 String category = categoryEntry.getKey();
-                Map<String, List<Float>> appRatingMap = categoryEntry.getValue();
             
                 System.out.println("Category: " + category);
             
@@ -57,24 +56,25 @@ public class Main {
                 float highestRating = Float.MIN_VALUE;
                 float lowestRating = Float.MAX_VALUE;
             
-                for (Map.Entry<String, List<Float>> appEntry : appRatingMap.entrySet()) {
-                    String appName = appEntry.getKey();  // Application name
-                    List<Float> ratings = appEntry.getValue();  // List of ratings
+            Map<String, List<Float>> appRatingMap = categoryEntry.getValue();
+            for (Map.Entry<String, List<Float>> appEntry : appRatingMap.entrySet()) {
+                String appName = appEntry.getKey();  // Application name
+                List<Float> ratings = appEntry.getValue();  // List of ratings
             
-                    // Find the highest and lowest rating for the application
-                    float maxRating = Collections.max(ratings);
-                    float minRating = Collections.min(ratings);
+                // Find the highest and lowest rating for the application
+                float maxRating = Collections.max(ratings);
+                float minRating = Collections.min(ratings);
             
                     // Check and update the highest rating application
-                    if (maxRating > highestRating) {
-                        highestRating = maxRating;
-                        highestAppName = appName;
+                if (maxRating > highestRating) {
+                highestRating = maxRating;
+                highestAppName = appName;
                     }
             
-                    // Check and update the lowest rating application
-                    if (minRating < lowestRating) {
-                        lowestRating = minRating;
-                        lowestAppName = appName;
+                // Check and update the lowest rating application
+                if (minRating < lowestRating) {
+                    lowestRating = minRating;
+                    lowestAppName = appName;
                     }
                 }
             
@@ -84,10 +84,6 @@ public class Main {
                 System.out.println();  // Add a newline between categories
             }
             
-            
-
-            
-
             Map<String, Float> result = calculateAverageRating(args[0], 1, 2 );
             for (Map.Entry<String, Float> enter : result.entrySet()) {
                 System.out.printf("Category: %s, Average Rating: %.2f%n", enter.getKey(), enter.getValue());
@@ -108,6 +104,7 @@ public class Main {
     
 
  private static Map<String, Float> calculateAverageRating (String filePath, int column1Index, int column2Index) throws IOException {
+    
     Map<String, Float> averageRatingMap = new HashMap<>();
     Map<String, Integer> categoryCountMap = new HashMap<>();
     int nanCount = 0;
@@ -125,14 +122,14 @@ public class Main {
                 String category = columns[column1Index].trim();
                 String ratingStr = columns[column2Index].trim();
 
-                // Check for NaN before adding to the computation
+               
                 if (!ratingStr.equalsIgnoreCase("NaN")) {
                     float rating = Float.parseFloat(ratingStr);
 
-                    // Update total rating for the category
+                    
                     averageRatingMap.put(category, averageRatingMap.getOrDefault(category, 0f) + rating);
 
-                    // Update count for the category
+                    
                     categoryCountMap.put(category, categoryCountMap.getOrDefault(category, 0) + 1);
                 } else {
                     nanCount++;
@@ -163,6 +160,7 @@ public class Main {
     }
 
         private static Map<String, Map<String, List<Float>>> analyzeAndPrintRatings (String filePath) {
+        
         Map<String, Map<String, List<Float>>> categoryMap = new HashMap<>();
 
         try (FileReader fileReader = new FileReader(filePath);
@@ -183,7 +181,7 @@ public class Main {
 
                         // Update categoryMap
                         categoryMap.computeIfAbsent(category, k -> new HashMap<>());
-                        Map<String, List<Float>> appRatingMap = categoryMap.get(category);
+                    Map<String, List<Float>> appRatingMap = categoryMap.get(category);
 
                         appRatingMap.computeIfAbsent(app, k -> new ArrayList<>());
                         List<Float> ratings = appRatingMap.get(app);
