@@ -1,0 +1,45 @@
+/* Container for the music player */
+#music-player {
+  width: 220px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style the audio controls */
+#musicPlayer {
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background: #333;
+  outline: none;
+}
+
+/* Remove default list styles & add padding */
+#songList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style each song item */
+#songList li {
+  padding: 10px 15px;
+  background-color: #444;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+/* Hover effect */
+#songList li:hover {
+  background-color: #666;
+}
+
+/* Optional: style the currently playing song */
+#songList li.playing {
+  background-color: #46a8ea; /* Spotify green vibe */
+  color: white;
+  font-weight: bold;
+}
