@@ -19,8 +19,8 @@ const player = {
 const platform = {
   x: 0,
   y: 350,
-  width: 1000,
-  height: 50,
+  width: 1800,
+  height: 600,
 };
 
 function update() {
