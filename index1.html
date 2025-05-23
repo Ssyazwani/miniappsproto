@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Mario-Style Platformer</title>
+  <style>
+    canvas { background: #333; display: block; margin: 20px auto; }
+  </style>
+</head>
+<body>
+<canvas id="gameCanvas" width="800" height="400"></canvas>
+
+<script>
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -12,29 +24,26 @@ const player = {
   dx: 0,
   dy: 0,
   speed: 0.3,
-  maxSpeed: 3,
+  maxSpeed: 4,
   friction: 0.85,
   gravity: 0.8,
   jumpStrength: 15,
   jumping: false,
   onGround: false,
-  jumpPressedTime: 0,  
+  jumpPressedTime: 0,  // to enable variable jump height
 };
 
 // Platforms
 const platforms = [
-  { x: 200, y: 350, width: 100, height: 20 },
-  { x: 400, y: 280, width: 100, height: 20 },
-  { x: 600, y: 220, width: 120, height: 20 },
-  { x: 800, y: 160, width: 100, height: 20 },
-  { x: 1000, y: 160, width: 100, height: 20 },
-  { x: 1200, y: 160, width: 100, height: 20 },
-  { x: 1400, y: 160, width: 90, height: 20 },
+  { x: 0, y: 350, width: 800, height: 50 },
+  { x: 200, y: 280, width: 100, height: 20 },
+  { x: 400, y: 220, width: 120, height: 20 },
+  { x: 600, y: 160, width: 100, height: 20 },
 ];
 
-
+// Update game state
 function update() {
- 
+  // Handle horizontal input with acceleration & friction
   if (keys['ArrowRight'] || keys['KeyD']) {
     player.dx += player.speed;
   } else if (keys['ArrowLeft'] || keys['KeyA']) {
@@ -43,13 +52,13 @@ function update() {
     player.dx *= player.friction;
   }
 
- 
+  // Clamp horizontal speed
   if (player.dx > player.maxSpeed) player.dx = player.maxSpeed;
   if (player.dx < -player.maxSpeed) player.dx = -player.maxSpeed;
 
   player.x += player.dx;
 
- 
+  // Keep inside canvas horizontally
   if (player.x < 0) {
     player.x = 0;
     player.dx = 0;
@@ -59,11 +68,11 @@ function update() {
     player.dx = 0;
   }
 
-
+  // Gravity & jumping
   if (player.jumping) {
-   
+    // If jump key released early, cut jump short
     if (!keys['Space'] && player.dy < 0) {
-      player.dy += player.gravity * 1.5; 
+      player.dy += player.gravity * 1.5;  // fall faster if jump released
       player.jumping = false;
     }
   }
@@ -73,7 +82,7 @@ function update() {
 
   player.onGround = false;
 
-
+  // Platform collision detection (simple AABB)
   for (let plat of platforms) {
     if (
       player.x < plat.x + plat.width &&
@@ -82,7 +91,7 @@ function update() {
       player.y + player.height < plat.y + plat.height &&
       player.dy >= 0
     ) {
-   
+      // Land on platform
       player.y = plat.y - player.height;
       player.dy = 0;
       player.onGround = true;
@@ -90,7 +99,7 @@ function update() {
     }
   }
 
-
+  // Prevent falling below canvas bottom
   if (player.y + player.height > canvas.height) {
     player.y = canvas.height - player.height;
     player.dy = 0;
@@ -99,23 +108,13 @@ function update() {
   }
 }
 
-const playerImage = new Image();
-playerImage.src = 'tuxSam.png';
-
+// Draw everything
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  if (playerImage.complete && playerImage.naturalWidth !== 0) {
-    ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
-  } else {
-   
-    ctx.fillStyle = 'lime';
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-  }
-
   // Draw player (simple red rectangle)
-  // ctx.fillStyle = 'red';
-  // ctx.fillRect(player.x, player.y, player.width, player.height);
+  ctx.fillStyle = 'red';
+  ctx.fillRect(player.x, player.y, player.width, player.height);
 
   // Draw platforms
   ctx.fillStyle = 'white';
@@ -147,6 +146,6 @@ document.addEventListener('keyup', (e) => {
 });
 
 loop();
-
-loop();
-
+</script>
+</body>
+</html>

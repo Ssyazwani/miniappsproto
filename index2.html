@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Password Protected Diary</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    background: #222;
+    color: #eee;
+  }
+  #loginContainer {
+    height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    flex-direction: column;
+    background: #111;
+  }
+  #mainContainer {
+    display: none;
+    height: 100vh;
+    display: flex;
+    background: #111;
+  }
+  #diary {
+    flex: 3;
+    padding: 20px;
+    background: #333;
+    overflow-y: auto;
+  }
+  #playlistAndEncouragement {
+    flex: 1;
+    background: #222;
+    padding: 20px;
+    border-left: 2px solid #555;
+    overflow-y: auto;
+  }
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    resize: vertical;
+    margin-bottom: 10px;
+  }
+  button {
+    cursor: pointer;
+    background: #666;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  button:hover {
+    background: #888;
+  }
+  #entries div {
+    background: #444;
+    margin-bottom: 5px;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  #entries div:hover {
+    background: #555;
+  }
+  #errorMsg {
+    color: #f55;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginContainer">
+  <h1>Enter Diary Password</h1>
+  <input type="password" id="passwordInput" placeholder="Password" />
+  <button id="loginBtn">Enter</button>
+  <div id="errorMsg"></div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContainer">
+  <div id="diary">
+    <h2>My Diary</h2>
+    <textarea id="diaryText" rows="15" placeholder="Write your diary here..."></textarea>
+    <button id="saveBtn">Save Entry</button>
+    <button id="cancelEditBtn" style="display:none; margin-left:10px;">Cancel Edit</button>
+    <div id="entries"></div>
+  </div>
+
+  <div id="playlistAndEncouragement">
+    <h3>Playlist</h3>
+    <audio id="audioPlayer" controls>
+      <source src="your-song.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <h3>Words of Encouragement</h3>
+    <div id="encouragementText" style="margin-top: 20px; font-size: 18px; font-weight: bold; color: #f0c;">
+      Stay positive and keep going!
+    </div>
+  </div>
+</div>
+
+<script>
+  // PASSWORD CHECK
+  const correctPassword = 'Forcebook123';  // Change this to your desired password
+  const loginContainer = document.getElementById('loginContainer');
+  const mainContainer = document.getElementById('mainContainer');
+  const passwordInput = document.getElementById('passwordInput');
+  const loginBtn = document.getElementById('loginBtn');
+  const errorMsg = document.getElementById('errorMsg');
+
+  loginBtn.addEventListener('click', () => {
+    if (passwordInput.value === correctPassword) {
+      loginContainer.style.display = 'none';
+      mainContainer.style.display = 'flex';
+      errorMsg.textContent = '';
+      passwordInput.value = '';
+    } else {
+      errorMsg.textContent = 'Incorrect password. Please try again.';
+    }
+  });
+
+  passwordInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') loginBtn.click();
+  });
+
+
+  // DIARY WITH EDIT FUNCTIONALITY
+  const saveBtn = document.getElementById('saveBtn');
+  const cancelEditBtn = document.getElementById('cancelEditBtn');
+  const diaryText = document.getElementById('diaryText');
+  const entriesDiv = document.getElementById('entries');
+
+  let entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+  let editIndex = -1;
+
+  function renderEntries() {
+    entriesDiv.innerHTML = '';
+    entries.forEach((entry, i) => {
+      const div = document.createElement('div');
+      div.textContent = entry;
+      div.style.cursor = 'pointer';
+      div.title = 'Click to edit this entry';
+      div.addEventListener('click', () => {
+        editIndex = i;
+        diaryText.value = entries[i];
+        saveBtn.textContent = 'Update Entry';
+        cancelEditBtn.style.display = 'inline-block';
+        diaryText.focus();
+      });
+      entriesDiv.appendChild(div);
+    });
+  }
+
+  renderEntries();
+
+  saveBtn.addEventListener('click', () => {
+    const text = diaryText.value.trim();
+    if (text.length === 0) return alert('Diary entry cannot be empty!');
+
+    if (editIndex === -1) {
+      entries.unshift(text);
+    } else {
+      entries[editIndex] = text;
+    }
+
+    localStorage.setItem('diaryEntries', JSON.stringify(entries));
+    diaryText.value = '';
+    editIndex = -1;
+    saveBtn.textContent = 'Save Entry';
+    cancelEditBtn.style.display = 'none';
+    renderEntries();
+  });
+
+  cancelEditBtn.addEventListener('click', () => {
+    editIndex = -1;
+    diaryText.value = '';
+    saveBtn.textContent = 'Save Entry';
+    cancelEditBtn.style.display = 'none';
+  });
+
+
+  // ENCOURAGEMENT ROTATION
+  const encouragements = [
+    "You're doing great!",
+    "Keep pushing forward!",
+    "Every step counts!",
+    "Believe in yourself!",
+    "Stay positive!",
+    "You got this!",
+    "Dream big!",
+    "Never give up!"
+  ];
+  const encouragementText = document.getElementById('encouragementText');
+
+  function showEncouragement() {
+    const msg = encouragements[Math.floor(Math.random() * encouragements.length)];
+    encouragementText.textContent = msg;
+  }
+
+  setInterval(showEncouragement, 7000);
+  showEncouragement();  // show one immediately on load
+</script>
+
+</body>
+</html>

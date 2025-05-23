@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Game with Music Playlist</title>
+  <title>Mini Testing</title>
   <link rel="stylesheet" href="playlist.css" />
   <style>
    
@@ -80,9 +80,9 @@
 
   songItems.forEach(item => {
     item.addEventListener('click', () => {
-      // Remove 'playing' class from all
+     
       songItems.forEach(i => i.classList.remove('playing'));
-      // Add 'playing' class to clicked one
+    
       item.classList.add('playing');
 
       const songSrc = item.getAttribute('data-src');
