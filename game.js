@@ -12,7 +12,7 @@ const player = {
   dx: 0,
   dy: 0,
   speed: 0.3,
-  maxSpeed: 3,
+  maxSpeed: 2.5,
   friction: 0.85,
   gravity: 0.8,
   jumpStrength: 15,
