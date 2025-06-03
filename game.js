@@ -3,15 +3,15 @@ const ctx = canvas.getContext('2d');
 
 const keys = {};
 
-// Player properties
+
 const player = {
   x: 50,
   y: 0,
-  width: 50,
+  width: 70,
   height: 70,
   dx: 0,
   dy: 0,
-  speed: 0.3,
+  speed: 0.25,
   maxSpeed: 2.5,
   friction: 0.85,
   gravity: 0.8,
@@ -21,16 +21,27 @@ const player = {
   jumpPressedTime: 0,  
 };
 
-// Platforms
-const platforms = [
-  { x: 200, y: 350, width: 100, height: 20 },
-  { x: 400, y: 280, width: 100, height: 20 },
-  { x: 600, y: 220, width: 120, height: 20 },
-  { x: 800, y: 160, width: 100, height: 20 },
-  { x: 1000, y: 160, width: 100, height: 20 },
-  { x: 1200, y: 160, width: 100, height: 20 },
-  { x: 1400, y: 160, width: 90, height: 20 },
-];
+
+// const platforms = [
+//   { x: 50, y: 380, width: 100, height: 20 },
+//   { x: 150, y: 320, width: 100, height: 20 },
+//   { x: 270, y: 260, width: 100, height: 20 },
+//   { x: 400, y: 200, width: 100, height: 20 },
+//   { x: 550, y: 140, width: 100, height: 20 },
+// ];
+
+
+const platforms = [];
+for (let i = 0; i < 5; i++) {
+  platforms.push({
+    x: 50 + i * 120, // horizontal spacing
+    y: 380 - i * 60, // vertical spacing
+    width: 100,
+    height: 20
+  });
+}
+
+
 
 
 function update() {
@@ -97,6 +108,10 @@ function update() {
     player.onGround = true;
     player.jumping = false;
   }
+
+    if (!reachedGoal && isOnPlatform(player, highestPlatform)) {
+    reachedGoal = true;
+  }
 }
 
 const playerImage = new Image();
@@ -117,21 +132,42 @@ function draw() {
   // ctx.fillStyle = 'red';
   // ctx.fillRect(player.x, player.y, player.width, player.height);
 
-  // Draw platforms
+ 
   ctx.fillStyle = 'white';
   for (let plat of platforms) {
     ctx.fillRect(plat.x, plat.y, plat.width, plat.height);
   }
+
+ if (reachedGoal) {
+  ctx.fillStyle = "deepskyblue"; 
+  ctx.font = "bold 36px 'Times New Roman', cursive"; 
+  ctx.textAlign = "center"; 
+  ctx.fillText("Yay you did it!!!!!", canvas.width / 2, 80);
 }
 
-// Game loop
+}
+
+let reachedGoal = false;
+function isOnPlatform(player, platform) {
+  return (
+    player.x + player.width > platform.x &&
+    player.x < platform.x + platform.width &&
+    player.y + player.height >= platform.y &&
+    player.y + player.height <= platform.y + platform.height + 5
+  );
+}
+const highestPlatform = platforms.reduce((top, p) =>
+  p.y < top.y ? p : top
+);
+
+
+
 function loop() {
   update();
   draw();
   requestAnimationFrame(loop);
 }
 
-// Key event listeners
 document.addEventListener('keydown', (e) => {
   keys[e.code] = true;
 
