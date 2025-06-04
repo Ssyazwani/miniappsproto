@@ -108,29 +108,29 @@ function update() {
   }
 }
 
-// Draw everything
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw player (simple red rectangle)
+  
   ctx.fillStyle = 'red';
   ctx.fillRect(player.x, player.y, player.width, player.height);
 
-  // Draw platforms
+
   ctx.fillStyle = 'white';
   for (let plat of platforms) {
     ctx.fillRect(plat.x, plat.y, plat.width, plat.height);
   }
 }
 
-// Game loop
+
 function loop() {
   update();
   draw();
   requestAnimationFrame(loop);
 }
 
-// Key event listeners
+
 document.addEventListener('keydown', (e) => {
   keys[e.code] = true;
 
