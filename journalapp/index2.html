@@ -96,7 +96,7 @@
   <div id="playlistAndEncouragement">
     <h3>Playlist</h3>
     <audio id="audioPlayer" controls>
-      <source src="your-song.mp3" type="audio/mpeg" />
+      <source src="music/distance.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
 
@@ -108,8 +108,8 @@
 </div>
 
 <script>
-  // PASSWORD CHECK
-  const correctPassword = 'Forcebook123';  // Change this to your desired password
+  
+  const correctPassword = 'Arashialwaysfivever';  
   const loginContainer = document.getElementById('loginContainer');
   const mainContainer = document.getElementById('mainContainer');
   const passwordInput = document.getElementById('passwordInput');
@@ -132,7 +132,6 @@
   });
 
 
-  // DIARY WITH EDIT FUNCTIONALITY
   const saveBtn = document.getElementById('saveBtn');
   const cancelEditBtn = document.getElementById('cancelEditBtn');
   const diaryText = document.getElementById('diaryText');
@@ -187,16 +186,15 @@
   });
 
 
-  // ENCOURAGEMENT ROTATION
+ 
   const encouragements = [
     "You're doing great!",
     "Keep pushing forward!",
     "Every step counts!",
-    "Believe in yourself!",
-    "Stay positive!",
     "You got this!",
     "Dream big!",
-    "Never give up!"
+    "Never give up!",
+    "This is on loop"
   ];
   const encouragementText = document.getElementById('encouragementText');
 
@@ -206,7 +204,7 @@
   }
 
   setInterval(showEncouragement, 7000);
-  showEncouragement();  // show one immediately on load
+  showEncouragement(); 
 </script>
 
 </body>

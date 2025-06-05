@@ -34,8 +34,8 @@ const player = {
 const platforms = [];
 for (let i = 0; i < 5; i++) {
   platforms.push({
-    x: 50 + i * 120, // horizontal spacing
-    y: 380 - i * 60, // vertical spacing
+    x: 50 + i * 120, 
+    y: 380 - i * 60,
     width: 100,
     height: 20
   });
@@ -128,9 +128,7 @@ function draw() {
     ctx.fillRect(player.x, player.y, player.width, player.height);
   }
 
-  // Draw player (simple red rectangle)
-  // ctx.fillStyle = 'red';
-  // ctx.fillRect(player.x, player.y, player.width, player.height);
+ 
 
  
   ctx.fillStyle = 'white';

@@ -15,7 +15,7 @@ const ctx = canvas.getContext('2d');
 
 const keys = {};
 
-// Player properties
+
 const player = {
   x: 50,
   y: 0,
@@ -30,7 +30,7 @@ const player = {
   jumpStrength: 15,
   jumping: false,
   onGround: false,
-  jumpPressedTime: 0,  // to enable variable jump height
+  jumpPressedTime: 0,  
 };
 
 
@@ -41,9 +41,9 @@ const platforms = [
   { x: 600, y: 160, width: 100, height: 20 },
 ];
 
-// Update game state
+
 function update() {
-  // Handle horizontal input with acceleration & friction
+ 
   if (keys['ArrowRight'] || keys['KeyD']) {
     player.dx += player.speed;
   } else if (keys['ArrowLeft'] || keys['KeyA']) {
@@ -52,13 +52,13 @@ function update() {
     player.dx *= player.friction;
   }
 
-  // Clamp horizontal speed
+
   if (player.dx > player.maxSpeed) player.dx = player.maxSpeed;
   if (player.dx < -player.maxSpeed) player.dx = -player.maxSpeed;
 
   player.x += player.dx;
 
-  // Keep inside canvas horizontally
+
   if (player.x < 0) {
     player.x = 0;
     player.dx = 0;
@@ -68,11 +68,11 @@ function update() {
     player.dx = 0;
   }
 
-  // Gravity & jumping
+
   if (player.jumping) {
-    // If jump key released early, cut jump short
+   
     if (!keys['Space'] && player.dy < 0) {
-      player.dy += player.gravity * 1.5;  // fall faster if jump released
+      player.dy += player.gravity * 1.5; 
       player.jumping = false;
     }
   }
@@ -82,7 +82,7 @@ function update() {
 
   player.onGround = false;
 
-  // Platform collision detection (simple AABB)
+ 
   for (let plat of platforms) {
     if (
       player.x < plat.x + plat.width &&
@@ -91,7 +91,7 @@ function update() {
       player.y + player.height < plat.y + plat.height &&
       player.dy >= 0
     ) {
-      // Land on platform
+   
       player.y = plat.y - player.height;
       player.dy = 0;
       player.onGround = true;
@@ -99,7 +99,7 @@ function update() {
     }
   }
 
-  // Prevent falling below canvas bottom
+ 
   if (player.y + player.height > canvas.height) {
     player.y = canvas.height - player.height;
     player.dy = 0;
