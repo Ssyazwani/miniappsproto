@@ -19,7 +19,7 @@ A tiny platformer game with 5 platforms and basic gravity.
 
 ## 📔 Journal App
 
-A minimal journaling tool to write and save short entries, with some music and words of encouragement on loop.
+A minimal journaling tool to write and save short entries, with words of encouragement on loop.
 
 - **Tech:** HTML, CSS, JavaScript
 - **What I learned:** Local storage, input handling, form validation
