@@ -12,7 +12,7 @@ A tiny platformer game with 5 platforms and basic gravity.
 
 - **Tech:** HTML, CSS, JavaScript
 - **What I learned:** Game loop basics, collision detection, handling player input
-- [🔗 Play the game](https://yourusername.github.io/jumping-game) <!-- if it's deployed -->
+
 
 
 ---
@@ -23,8 +23,6 @@ A minimal journaling tool to write and save short entries, with some music and w
 
 - **Tech:** HTML, CSS, JavaScript
 - **What I learned:** Local storage, input handling, form validation
-- [🔗 Try it](https://yourusername.github.io/journal-app)
-- [📂 View code](https://github.com/yourusername/journal-app)
 
 ---
 
