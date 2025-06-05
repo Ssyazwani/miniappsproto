@@ -3,6 +3,7 @@
 A collection of small projects I've built to explore coding, have fun, and learn by doing.
 
 These aren't production-ready, but they each taught me something new — from making things jump to building a Java GUI. 
+[Link to the Apps](https://ssyazwani.github.io/miniappsproto/)
 
 ---
 
@@ -19,7 +20,7 @@ A tiny platformer game with 5 platforms and basic gravity.
 
 ## 📔 Journal App
 
-A minimal journaling tool to write and save short entries, with some music and words of encouragement on loop.
+A minimal journaling tool to write and save short entries, with words of encouragement on loop.
 
 - **Tech:** HTML, CSS, JavaScript
 - **What I learned:** Local storage, input handling, form validation
