@@ -3,6 +3,7 @@
 A collection of small projects I've built to explore coding, have fun, and learn by doing.
 
 These aren't production-ready, but they each taught me something new — from making things jump to building a Java GUI. 
+[Link to the Apps](https://ssyazwani.github.io/miniappsproto/)
 
 ---
 
