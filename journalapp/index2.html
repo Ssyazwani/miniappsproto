@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Password Protected Diary</title>
+<title>Writing Pad</title>
 <style>
 body {
   font-family: 'Times New Roman', Times, serif, sans-serif;
@@ -19,7 +19,7 @@ body {
   justify-content: center; 
   align-items: center;
   flex-direction: column;
-  background: #759168;
+  background: #a8c59a;
 }
 
 #mainContainer {
@@ -48,7 +48,12 @@ body {
     right: 20px;
     width: 250px;
     z-index: 1000;
-    display: none;       
+    padding: 10px 15px;
+    background-color: #9bb69b;
+    border-radius: 10px;
+    color: #344c3f;
+    display: none;    
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);   
   }
 
   #encouragementBox {
@@ -118,7 +123,7 @@ body {
 
 <div id="mainContainer">
   <div id="diary">
-    <h2>Writing down thoughts...</h2>
+    <h2>Writing down my thoughts...</h2>
     <textarea id="diaryText" rows="15" placeholder="Pen down your thoughts/memos here"></textarea>
     <div>
       <button id="saveBtn">Save Entry</button>
@@ -131,8 +136,9 @@ body {
 
 
 <div id="wordsEncouragement">
+  <p>Hey hey pss pss, look here!:</p>
   <div id="encouragementBox">
-    <div id="encouragementText">Stay positive and keep going!</div>
+    <div id="encouragementText">Keep going!</div>
   </div>
 </div>
 
@@ -159,10 +165,10 @@ document.body.style.overflow = 'hidden';
 loginBtn.addEventListener('click', () => {
   if (passwordInput.value === correctPassword) {
     loginContainer.style.display = 'none';
-    mainContainer.style.display = 'flex';  // or 'block' depending on layout
-    document.body.style.overflow = 'auto';  // enable scroll
+    mainContainer.style.display = 'flex';  
+    document.body.style.overflow = 'auto';  
 
-    wordsEncouragement.style.display = 'block'; // show encouragement box
+    wordsEncouragement.style.display = 'block'; 
     errorMsg.textContent = '';
     passwordInput.value = '';
 
@@ -283,7 +289,9 @@ cancelEditBtn.addEventListener('click', () => {
     "You got this!",
     "Dream big!",
     "Never give up!",
-    "This is on loop"
+    "This is on loop",
+    "Take breaks okay, don't be too hard on yourself",
+    "You get tired after a day's work - it is evidence you are working hard"
   ];
   
 
