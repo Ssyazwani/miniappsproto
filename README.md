@@ -7,9 +7,9 @@ These aren't production-ready, but they each taught me something new — from ma
 
 ---
 
-## 🎮 Jumping Game
+## Basic Jumping Game
 
-A tiny platformer game with 5 platforms and basic gravity.
+A tiny platformer game with 6 platforms and basic gravity.
 
 - **Tech:** HTML, CSS, JavaScript
 - **What I learned:** Game loop basics, collision detection, handling player input
@@ -18,7 +18,7 @@ A tiny platformer game with 5 platforms and basic gravity.
 
 ---
 
-## 📔 Journal App
+## Journal App
 
 A minimal journaling tool to write and save short entries, with words of encouragement on loop.
 
@@ -27,9 +27,9 @@ A minimal journaling tool to write and save short entries, with words of encoura
 
 ---
 
-## 🖥️ Java GUI App
+## 🖥Java GUI App
 
-A basic GUI application made with Java Swing.
+A basic GUI application made with Java Swing .
 
 - **Tech:** Java, Swing
 - **What I learned:** Layouts, event handling, UI design in Java
@@ -42,5 +42,5 @@ A basic GUI application made with Java Swing.
 
 ## 📌 More Coming Soon...
 
-This list will grow as I keep learning!
+This list will grow 
 
