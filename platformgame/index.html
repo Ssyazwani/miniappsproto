@@ -9,89 +9,33 @@
    
     #game-container {
       display: flex;
-      align-items: flex-start;
+      justify-content: center; 
+      align-items: center; 
       gap: 10px;
       padding: 10px;
-      background: #111;
+      background: #748d93;
       min-height: 450px;
       font-family: Arial, sans-serif;
+      
     }
 
 
     #gameCanvas {
-      background: #222;
+      background: #2a5668;
       border: 2px solid #fff;
     }
 
    
-    #music-player {
-      width: 120px;
-      color: white;
-    }
-
-    #music-player audio {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    #songList {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #songList li {
-      cursor: pointer;
-      padding: 8px 10px;
-      background: #333;
-      margin-bottom: 6px;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-
-    #songList li:hover {
-      background: #555;
-    }
   </style>
 </head>
 <body>
   <div id="game-container">
     <canvas id="gameCanvas" width="800" height="400"></canvas>
-
-    <div id="music-player">
-      <audio id="musicPlayer" controls>
-        <source id="audioSource" src="music/distance.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-
-      <ul id="songList">
-        <li data-src="music/distance.mp3">Distance</li>
-        <li data-src="music/bluesalvia.mp3">Blue Salvia</li>
-        <li data-src="music/アカツキ.mp3">アカツキ</li>
-      </ul>
-    </div>
-  </div>
+  
 
   <script src="game.js"></script>
 <script>
-  const audioPlayer = document.getElementById('musicPlayer');
-  const audioSource = document.getElementById('audioSource');
-  const songItems = document.querySelectorAll('#songList li');
-
-  songItems.forEach(item => {
-    item.addEventListener('click', () => {
-     
-      songItems.forEach(i => i.classList.remove('playing'));
-    
-      item.classList.add('playing');
-
-      const songSrc = item.getAttribute('data-src');
-      console.log("Switching to:", songSrc); 
-      audioSource.src = songSrc;
-      audioPlayer.load();
-      audioPlayer.play();
-    });
-  });
+ 
 </script>
 
 
