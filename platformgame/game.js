@@ -32,7 +32,7 @@ const player = {
 
 
 const platforms = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 6; i++) {
   platforms.push({
     x: 50 + i * 120, 
     y: 380 - i * 60,
@@ -140,7 +140,7 @@ function draw() {
   ctx.fillStyle = "deepskyblue"; 
   ctx.font = "bold 36px 'Times New Roman', cursive"; 
   ctx.textAlign = "center"; 
-  ctx.fillText("Yay you did it!!!!!", canvas.width / 2, 80);
+  ctx.fillText("Yay you reached the top, bye!!", canvas.width / 2, 80);
 }
 
 }
