@@ -27,7 +27,7 @@ A minimal journaling tool to write and save short entries, with words of encoura
 
 ---
 
-## 🖥Java GUI App
+## Java GUI App
 
 A basic GUI application made with Java Swing .
 
@@ -40,7 +40,7 @@ A basic GUI application made with Java Swing .
 
 ---
 
-## 📌 More Coming Soon...
+## More Coming Soon ( Hopefully )
 
-This list will grow 
+This list will grow slowly
 
